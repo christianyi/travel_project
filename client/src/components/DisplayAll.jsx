@@ -22,18 +22,18 @@ const DisplayAll = (props) => {
             <header>
                 <Banner/>
                 <h2>Manager: </h2>
-                <Link to='/' className="link-buttons">Admit</Link>
+                <Link to='/' className="link-buttons">New User</Link>
             </header>
             <div className='all-users'>
                 {
-                    patientList.map((user) => (
+                    userList.map((user) => (
                         <div key={user._id} className='user'>
                             <Link to={`/${user._id}/details`}>
                                 <h3>{user.name}</h3>
                             </Link>
                             <Link to={`/${user._id}/edit`}>Edit</Link>
                             <p>Age: {user.age}</p>
-                            <p>{user.symptoms}</p>
+                            <p>{user.bio}</p>
                         </div>
                     ))
                 }

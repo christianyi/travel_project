@@ -16,12 +16,12 @@ const DisplayOne = (props) => {
             .then((response) => {
                 console.log(response)
                 console.log(response.data)
-                setOnePatient(response.data)
+                setOneUser(response.data)
             })
             .catch((err)=> console.log(err))
     },[id])
 
-    const deletePatient = () => {
+    const deleteUser = () => {
         axios.delete(`http://localhost:8000/api/deleteUser/${id}`)
         .then((response) => {
             console.log(response)
@@ -41,10 +41,10 @@ const DisplayOne = (props) => {
             <br />
             <h2>{oneUser.age} years of age.</h2>
             <br />
-            <h2>Symptoms:</h2>
-            <p>{oneUser.symptoms}</p>
+            <h2>bio:</h2>
+            <p>{oneUser.bio}</p>
             <br />
-            <Link onClick={deleteUser} className="link-buttons">Discharge User</Link>
+            <Link onClick={deleteUser} className="link-buttons">Remove User</Link>
         </div>
     )
 }

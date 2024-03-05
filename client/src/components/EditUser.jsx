@@ -7,7 +7,7 @@ const EditUser = (props) => {
     const {id} = useParams()
     const [name, setName] = useState("")
     const [age, setAge] = useState()
-    const [symptoms, setSymptoms] = useState("")
+    const [bio, setBio] = useState("")
     const [errors, setErrors] = useState({})
 
     const navigate = useNavigate()
@@ -18,14 +18,14 @@ const EditUser = (props) => {
             console.log(response.data)
             setName(response.data.name)
             setAge(response.data.age)
-            setSymptoms(response.data.symptoms)
+            setBio(response.data.bio)
         })
         .catch((err) => console.log(err))
     },[])
 
     const submitHandler = (e) => {
         e.preventDefault()
-        const updatedPatient = {name, age, symptoms}
+        const updatedUser = {name, age, bio}
         axios.put(`http://localhost:8000/api/editUser/${id}`, updatedUser)
         .then((response) => {
             console.log(response.data)
@@ -64,13 +64,13 @@ const EditUser = (props) => {
                     null
                 }
                 <br />
-                <label>Symptoms: </label>
+                <label>Bio: </label>
                 <br />
-                <input type="text" onChange={(e) => setSymptoms(e.target.value)} value={symptoms}/>
+                <input type="text" onChange={(e) => setBio(e.target.value)} value={bio}/>
                 <br />
                 {
-                    errors.symptoms?
-                    <p>{errors.symptoms.message}</p>:
+                    errors.bio?
+                    <p>{errors.bio.message}</p>:
                     null
                 }
                 <br />

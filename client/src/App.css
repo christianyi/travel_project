@@ -1,0 +1,36 @@
+#root {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .patient{
+    border: 1pt solid black;
+    padding: 2rem;
+    width: 200px;
+    margin: 10px
+  }
+  
+  .link-buttons, button{
+      background-color: #ffffff;
+      border: 2pt solid black;
+      color: rgb(0, 0, 0);
+      padding: 14px 25px;
+      text-align: center;
+      text-decoration: none;
+      display: inline;
+      height: fit-content;
+  
+  }
+  header{
+    display: flex;
+    justify-content: space-around;
+  
+  }
+  
+  .all-patients{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
