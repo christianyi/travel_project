@@ -3,33 +3,33 @@ import { Link, useNavigate, useParams } from "react-router-dom"
 import axios from "axios"
 import Banner from "./Banner"
 
-const EditUser = (props) => {
+const EditStory = (props) => {
     const {id} = useParams()
-    const [name, setName] = useState("")
-    const [age, setAge] = useState()
-    const [bio, setBio] = useState("")
+    const [location, setLocation] = useState("")
+    const [date, setDate] = useState()
+    const [story, setStory] = useState("")
     const [errors, setErrors] = useState({})
 
     const navigate = useNavigate()
 
     useEffect(() => {
-        axios.get(`http://localhost:8000/api/users/${id}`)
+        axios.get(`http://localhost:8000/api/stories/${id}`)
         .then((response) => {
             console.log(response.data)
-            setName(response.data.name)
-            setAge(response.data.age)
-            setBio(response.data.bio)
+            setLocation(response.data.location)
+            setDate(response.data.date)
+            setStory(response.data.story)
         })
         .catch((err) => console.log(err))
     },[])
 
     const submitHandler = (e) => {
         e.preventDefault()
-        const updatedUser = {name, age, bio}
-        axios.put(`http://localhost:8000/api/editUser/${id}`, updatedUser)
+        const updatedStory = {location, date, story}
+        axios.put(`http://localhost:8000/api/editStory/${id}`, updatedStory)
         .then((response) => {
             console.log(response.data)
-            navigate('/users')
+            navigate('/stories')
         }) 
         .catch((err) => {
             console.log(err.response.data.errors);
@@ -40,37 +40,37 @@ const EditUser = (props) => {
         <div>
             <header>
                 <Banner/>
-                <h2>Update {name}'s Details</h2>
+                <h2>Update {location} Details</h2>
                 <Link to={`/${id}/details`} className="link-buttons">Details</Link>
             </header>
             <form onSubmit={submitHandler}>
-                <label>Name: </label>
+                <label>Location: </label>
                 <br />
-                <input type="text" onChange={(e) => setName(e.target.value)} value={name}/>
+                <input type="text" onChange={(e) => setLocation(e.target.value)} value={location}/>
                 <br />
                 {
-                    errors.name?
-                    <p>{errors.name.message}</p>:
+                    errors.location?
+                    <p>{errors.location.message}</p>:
                     null
                 }
                 <br />
-                <label>Age: </label>
+                <label>Date: </label>
                 <br />
-                <input type="number" onChange={(e) => setAge(e.target.value)} value={age}/>
+                <input type="date" onChange={(e) => setDate(e.target.value)} value={date}/>
                 <br />
                 {
-                    errors.age?
-                    <p>{errors.age.message}</p>:
+                    errors.date?
+                    <p>{errors.date.message}</p>:
                     null
                 }
                 <br />
-                <label>Bio: </label>
+                <label>Story: </label>
                 <br />
-                <input type="text" onChange={(e) => setBio(e.target.value)} value={bio}/>
+                <input type="text" onChange={(e) => setStory(e.target.value)} value={story}/>
                 <br />
                 {
-                    errors.bio?
-                    <p>{errors.bio.message}</p>:
+                    errors.story?
+                    <p>{errors.story.message}</p>:
                     null
                 }
                 <br />
@@ -80,4 +80,4 @@ const EditUser = (props) => {
     )
 
 }
-export default EditUser
+export default EditStory

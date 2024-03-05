@@ -4,14 +4,12 @@ import { Link } from 'react-router-dom';
 import Banner from './Banner'
 
 const DisplayAll = (props) => {
-    const { userList, setUserList } = props
+    const { storyList, setStoryList } = props
 
     useEffect(() => {
-        axios.get('http://localhost:8000/api/users')
+        axios.get('http://localhost:8000/api/stories')
             .then((response) => {
-                console.log('user list called');
-                console.log(response.data);
-                setUserList(response.data)
+                setStoryList(response.data)
             })
             .catch((err) => {
                 console.log(err);
@@ -21,19 +19,19 @@ const DisplayAll = (props) => {
         <div>
             <header>
                 <Banner/>
-                <h2>Manager: </h2>
-                <Link to='/' className="link-buttons">New User</Link>
+                <h2>All Stories: </h2>
+                
             </header>
             <div className='all-users'>
                 {
-                    userList.map((user) => (
-                        <div key={user._id} className='user'>
-                            <Link to={`/${user._id}/details`}>
-                                <h3>{user.name}</h3>
+                    storyList.map((story) => (
+                        <div key={story._id} className='story'>
+                            <Link to={`/${story._id}/details`}>
+                                <h3>{story.location}</h3>
                             </Link>
-                            <Link to={`/${user._id}/edit`}>Edit</Link>
-                            <p>Age: {user.age}</p>
-                            <p>{user.bio}</p>
+                            <Link to={`/${story._id}/edit`}>Edit</Link>
+                            <p>Date: {story.date}</p>
+                            <p>{story.story}</p>
                         </div>
                     ))
                 }
